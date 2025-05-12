@@ -2,14 +2,14 @@
 
 #define MAX_INPUT 1024
 
-#include <string>
-#include <vector>
-
-inline char* User;
-inline char CWD[MAX_INPUT];
+extern char* token[MAX_INPUT];
+extern int argc;
+extern char* User;
+extern char CWD[MAX_INPUT];
 
 void InitTermianal();
 void PrintPrompt();
-void ReadInput(char* Input, const int& Length);
-std::vector<std::string> Parse(char* Input);
-void execute();
+void ReadInput(char* Input, int Length);
+// void Parse();
+void Parse(char *Input);
+void Execute();

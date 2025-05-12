@@ -13,13 +13,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #set(CMAKE_CXX_EXTENSIONS OFF)  # Optional: Disable compiler-specific extensions like `gnu++`
 
 # Define your target
-add_executable(${PROJECT_NAME} src/main.cpp src/init.cpp)
+add_executable(${PROJECT_NAME} src/main.c src/init.c)
 
 # Apply the compile options (target-specific)
 target_compile_options(${PROJECT_NAME} PRIVATE 
     -fsanitize=address  # Enable AddressSanitizer
     -fdiagnostics-color=always  # Enable colored diagnostics (useful for readability)
-    -O3  # Maximum optimization
+    -O3
+    -std=c23
 )
 
 # Optionally link the AddressSanitizer runtime (needed for AddressSanitizer to work)
