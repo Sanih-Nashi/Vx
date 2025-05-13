@@ -9,7 +9,7 @@
 
 #elif defined(WIN32) || defined(WIN64)
 
-#include <direct.h>
+#include <io.h>
 #include <windows.h>
 
 #endif
@@ -22,7 +22,7 @@
 
 char* token[MAX_INPUT];
 int argc;
-char* User;
+char User[MAX_INPUT];
 char CWD[MAX_INPUT];
 
 
@@ -45,8 +45,10 @@ void InitTermianal()
 
 #elif defined(WIN32) || defined(WIN64)
 
-  User = getenv("USERNAME");
+  DWORD size = sizeof(User);
 
+    if (!GetUserName(username, &size))
+      printf("Error getting user name: %ld\n", GetLastError());
   
   if (_getcwd(CWD, MAX_INPUT) == nullptr)
   {
@@ -62,12 +64,27 @@ void InitTermianal()
 void PrintPrompt()
 {
 
+    
+#ifdef __unix__
+
   if (getcwd(CWD, MAX_INPUT) == nullptr)
   {
     perror("Vx: Cannot access the the Current Directory");
     perror("\n    Exiting with the code 1");
     exit(1);
   }
+
+#elif defined(WIN32) || defined(WIN64)
+
+  if (_getcwd(CWD, MAX_INPUT) == nullptr)
+  {
+    perror("Vx: Cannot access the the Current Directory");
+    perror("\n    Exiting with the code 1");
+    exit(1);
+  }
+
+#endif
+
 
   printf("\n\033[34m%s\033[0m&\033[34mVx\033[0m::\n::\033[32m", User);
 
