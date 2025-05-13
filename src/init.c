@@ -32,11 +32,8 @@ void InitTermianal()
   printf("\033[H\033[2J"); //clears screen and puts cursor on top
 
 #ifdef __unix__
-  User = getenv("USER");
-#elif defined(WIN32) || defined(WIN64)
-  User = getenv("USERNAME");
-#endif
 
+  User = getenv("USER");
 
   if (getcwd(CWD, MAX_INPUT) == nullptr)
   {
@@ -44,6 +41,22 @@ void InitTermianal()
     perror("\n    Exiting with the code 1");
     exit(1);
   }
+
+
+#elif defined(WIN32) || defined(WIN64)
+
+  User = getenv("USERNAME");
+
+  
+  if (_getcwd(CWD, MAX_INPUT) == nullptr)
+  {
+    perror("Vx: Cannot access the the Current Directory");
+    perror("\n    Exiting with the code 1");
+    exit(1);
+  }
+
+#endif
+
 }
 
 void PrintPrompt()
