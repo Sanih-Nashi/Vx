@@ -9,6 +9,7 @@
 
 #elif defined(WIN32) || defined(WIN64)
 
+#include <direct.h>
 #include <windows.h>
 
 #endif
@@ -28,7 +29,7 @@ char CWD[MAX_INPUT];
 
 void InitTermianal()
 {
-  write(STDOUT_FILENO, "\033[H\033[2J", 7); //clears screen and puts cursor on top
+  printf("\033[H\033[2J"); //clears screen and puts cursor on top
 
 #ifdef __unix__
   User = getenv("USER");
@@ -88,7 +89,6 @@ void ReadInput(char* Input, int Length)
   if (fgets(Input, Length, stdin) == nullptr)
   {
     perror("\nVx: Interrupt, exited with error code 1");
-    sleep(1);
     exit(1);
   }
   
