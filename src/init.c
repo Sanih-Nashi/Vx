@@ -22,7 +22,7 @@
 
 char* token[MAX_INPUT];
 int argc;
-char User[MAX_INPUT];
+char* User;
 char CWD[MAX_INPUT];
 
 
@@ -31,9 +31,8 @@ void InitTermianal()
 {
   printf("\033[H\033[2J"); //clears screen and puts cursor on top
 
-#ifdef __unix__
-
   User = getenv("USER");
+  
 
   if (getcwd(CWD, MAX_INPUT) == nullptr)
   {
@@ -41,23 +40,6 @@ void InitTermianal()
     perror("\n    Exiting with the code 1");
     exit(1);
   }
-
-
-#elif defined(WIN32) || defined(WIN64)
-
-  DWORD size = sizeof(User);
-
-    if (!GetUserName(username, &size))
-      printf("Error getting user name: %ld\n", GetLastError());
-  
-  if (_getcwd(CWD, MAX_INPUT) == nullptr)
-  {
-    perror("Vx: Cannot access the the Current Directory");
-    perror("\n    Exiting with the code 1");
-    exit(1);
-  }
-
-#endif
 
 }
 
