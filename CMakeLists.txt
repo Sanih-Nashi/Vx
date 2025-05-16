@@ -5,12 +5,12 @@ project(vx)
 message(STATUS "Building ${PROJECT_NAME}")
 
 # You may need to specify the path to your source files.
-message(STATUS "File: ${CPP_FILE}")
+message(STATUS "File: ${C_FILE}")
 
 # Set the C++ version to C++23 (recommended approach)
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-#set(CMAKE_CXX_EXTENSIONS OFF)  # Optional: Disable compiler-specific extensions like `gnu++`
+set(CMAKE_C_STANDARD 23)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+#set(CMAKE_C_EXTENSIONS OFF)  # Optional: Disable compiler-specific extensions like `gnu++`
 
 # Define your target
 add_executable(${PROJECT_NAME} src/main.c src/init.c)
