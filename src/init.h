@@ -4,7 +4,7 @@
 
 extern char* token[MAX_INPUT];
 extern int argc;
-extern char User[MAX_INPUT];
+extern char* User;
 extern char CWD[MAX_INPUT];
 
 void InitTermianal();
