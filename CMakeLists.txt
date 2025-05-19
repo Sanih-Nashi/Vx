@@ -13,7 +13,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 #set(CMAKE_C_EXTENSIONS OFF)  # Optional: Disable compiler-specific extensions like `gnu++`
 
 # Define your target
-add_executable(${PROJECT_NAME} src/main.c src/init.c)
+add_executable(${PROJECT_NAME} src/main.c src/init.c src/Process_n_Execute.c)
 
 # Apply the compile options (target-specific)
 target_compile_options(${PROJECT_NAME} PRIVATE 
