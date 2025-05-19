@@ -7,7 +7,8 @@
 #include <unistd.h>
 
 
-#include "Process_n_Execute.h"
+#include "process_n_execute.h"
+#include "raw_mode.h"
 
 
 char* argv[MAX_INPUT];
@@ -17,7 +18,8 @@ int argc;
 
 void Parse(char* Input)
 {
-  Input[strcspn(Input, "\n")] = '\0';
+  printf("In Parser\n\r");
+  fflush(stdout);
     if (Input == NULL)
         return;
 
@@ -28,11 +30,15 @@ void Parse(char* Input)
         argc++;
         argv[argc] = strtok(NULL, " ");
     }
-    argv[argc] = NULL;
 }
 
 void Execute()
 {
+
+  
+  printf("In Execution\n\r");
+  fflush(stdout);
+  DisableRawMode();
 
   if (argv[0] == NULL)
   return;
@@ -44,7 +50,7 @@ void Execute()
   {
 
     if (argv[1] == NULL)
-      fprintf(stderr, "Vx: NO file name mentioned for cd");
+      fprintf(stderr, "Vx: NO file name mentioned for cd\n");
 
     else if (chdir(argv[1]) != 0)
       fprintf(stderr, "Vx: cannot cd into %s\n", argv[1]);
@@ -64,7 +70,7 @@ void Execute()
     execvp(argv[0], argv);
 
     char str[MAX_INPUT];
-    sprintf(str, "Vx: %s", argv[0]);
+    sprintf(str, "Vx: %sslkfj", argv[0]);
     perror(str);
     exit(EXIT_FAILURE);
   } 
@@ -74,5 +80,6 @@ void Execute()
       waitpid(pid, &status, 0);
   }
 
+  EnableRawMode();
 
 }

@@ -1,5 +1,10 @@
 #include "init.h"
-#include "Process_n_Execute.h"
+#include "process_n_execute.h"
+#include "definitions.h"
+#include "input.h"
+
+#include <stdlib.h>
+#include <string.h>
 
 int main()
 {
@@ -8,7 +13,8 @@ int main()
   while(true)
   { 
     PrintPrompt();
-    ReadInput(Input, MAX_INPUT);
+    if (ReadInput(Input, MAX_INPUT) == EXIT_FAILURE)
+      continue;
     Parse(Input);
     Execute();
   }
