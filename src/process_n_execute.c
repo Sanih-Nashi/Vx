@@ -18,8 +18,6 @@ int argc;
 
 void Parse(char* Input)
 {
-  printf("In Parser\n\r");
-  fflush(stdout);
     if (Input == NULL)
         return;
 
@@ -34,31 +32,27 @@ void Parse(char* Input)
 
 void Execute()
 {
-
   
-  printf("In Execution\n\r");
-  fflush(stdout);
-  DisableRawMode();
-
   if (argv[0] == NULL)
   return;
-
-  else if (strcmp(argv[0], "exit") == 0)
-    exit(1);
+  
+  if (strcmp(argv[0], "exit") == 0)
+  exit(1);
 
   else if (strcmp(argv[0], "cd") == 0)
   {
-
+    
     if (argv[1] == NULL)
-      fprintf(stderr, "Vx: NO file name mentioned for cd\n");
-
+      fprintf(stderr, "Vx: NO file name mentioned for cd\n\r");
+    
     else if (chdir(argv[1]) != 0)
-      fprintf(stderr, "Vx: cannot cd into %s\n", argv[1]);
-      
+      fprintf(stderr, "Vx: cannot cd into %s\n\r", argv[1]);
+    
     return;
-
+    
   }
-
+  
+  DisableRawMode();
 
   pid_t pid = fork();
 
@@ -70,11 +64,12 @@ void Execute()
     execvp(argv[0], argv);
 
     char str[MAX_INPUT];
-    sprintf(str, "Vx: %sslkfj", argv[0]);
+    sprintf(str, "Vx: %s", argv[0]);
     perror(str);
     exit(EXIT_FAILURE);
   } 
-  else {
+  else 
+  {
       // Parent process
       int status;
       waitpid(pid, &status, 0);

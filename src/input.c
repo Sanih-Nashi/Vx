@@ -27,10 +27,6 @@ int ReadInput(char* Input, int MaxLength)
 {
   char c;
 
-  
-  printf("In ReadInput\n\r");
-  fflush(stdout);
-
   while (true)
   {
 
@@ -48,7 +44,6 @@ int ReadInput(char* Input, int MaxLength)
 
       continue;
     }
-
 
     switch (c)
     {
@@ -68,6 +63,20 @@ int ReadInput(char* Input, int MaxLength)
         NoOfCharTyped = 0;
         return EXIT_SUCCESS;
       }
+
+      case BACKSPACE:
+      case DEL_KEY:
+      {
+        if (NoOfCharTyped > 0)
+        {
+
+          printf("\b \b");
+          fflush(stdout);
+          NoOfCharTyped--;
+          break;
+        }
+      }
+
     };
 
   }
